@@ -1,18 +1,16 @@
 import casual from 'casual';
+import { Author } from './connectors';
 
 const resolvers = {
     Query: {
-        author: (root, args) => ({id: 1, fullName: 'Full name'}), 
-        allAuthors: (root, args) => [{id: 1, fullName: 'Full name'}], 
+        author: (_, args) => Author.find({where: args}), 
+        allAuthors: _ => Author.findAll(), 
     },
     Author: {
-        books: author => [
-            { id: 1, title: 'title 1', description: 'description 1' },
-            { id: 2, title: 'title 2', description: 'description 2' },
-        ]
+        books: author => author.getBooks()
     },
     Book: {
-        author: book => ({ id: 1, fillName: 'Full name' }),
+        author: book => book.getAuthors(),
     },
 }
 

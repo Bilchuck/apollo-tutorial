@@ -17,7 +17,7 @@ const BookModel = db.define('book', {
 });
 
 AuthorModel.hasMany(BookModel);
-BookModel.hasMany(AuthorModel);
+BookModel.belongsTo(AuthorModel);
 
 casual.seed(111); // same generated data by `111` seed
 
@@ -27,7 +27,7 @@ db.sync({force: true}).then(() => {
             fullName: casual.full_name,
         }).then(author => 
             author.createBook({
-                title: `A book by ${authon.fullName}`,
+                title: `A book by ${author.fullName}`,
                 description: casual.sentences(3),
             })
         )
@@ -37,4 +37,4 @@ db.sync({force: true}).then(() => {
 const Author = db.models.author;
 const Book = db.models.book;
 
-export default { Author, Book };
+export { Author, Book };
