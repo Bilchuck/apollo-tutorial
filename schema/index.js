@@ -1,3 +1,3 @@
-import testMock from './test';
+import schema from './schema';
 
-export default testMock;
+export default schema;
