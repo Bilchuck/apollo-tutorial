@@ -1,10 +1,11 @@
 import casual from 'casual';
-import { Author, View } from './connectors';
+import { Author, View, FortuneCookie } from './connectors';
 
 const resolvers = {
     Query: {
         author: (_, args) => Author.find({where: args}), 
         allAuthors: _ => Author.findAll(), 
+        getFortuneCookies: () => FortuneCookie.getOne(),
     },
     Author: {
         books: author => author.getBooks()

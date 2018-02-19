@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
 import casual from 'casual';
+import fetch from 'node-fetch';
 import _ from 'lodash';
 
 mongoose.Promise = global.Promise;
@@ -55,4 +56,14 @@ db.sync({force: true}).then(() => {
 const Author = db.models.author;
 const Book = db.models.book;
 
-export { Author, View };
+const FortuneCookie = {
+    getOne: () => fetch(`http://fortunecookieapi.herokuapp.com/v1/cookie`)
+                    .then(res => res.json())
+                    .then(res => res[0].fortune.message)
+}
+
+export { 
+    Author, 
+    View, 
+    FortuneCookie,
+};
