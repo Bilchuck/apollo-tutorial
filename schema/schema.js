@@ -20,6 +20,7 @@ const typeDefs = `
         title: String
         description: String
         author: Author
+        views: Int
     }
 `;
 

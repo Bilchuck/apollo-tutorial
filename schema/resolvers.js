@@ -1,5 +1,5 @@
 import casual from 'casual';
-import { Author } from './connectors';
+import { Author, View } from './connectors';
 
 const resolvers = {
     Query: {
@@ -11,6 +11,7 @@ const resolvers = {
     },
     Book: {
         author: book => book.getAuthors(),
+        views: book => View.findOne({ bookId: book.id }).then(v => v.views),
     },
 }
 
